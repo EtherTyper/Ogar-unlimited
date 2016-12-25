@@ -25,9 +25,11 @@ var fs = require("fs");
 //module.exports = PlayerTracker;
 
 module.exports = class PlayerTracker {
-  constructor(gameServer, socket, owner) {
+  constructor(gameServer, socket, owner,childService) {
     this.pID = -1;
     this.ft = false;
+    this.average = false;
+    this.childService = childService;
     this.disconnect = -1; // Disconnection
     this.name = "";
     this.gameServer = gameServer;
@@ -70,6 +72,7 @@ module.exports = class PlayerTracker {
     this.chatname = "";
     this.reservedNames = [];
     this.minioncontrol = false;
+    this.lastposup = 0;
     this.premium = '';
     this.nodeDestroyQueue = [];
     this.visibleNodes = [];
@@ -86,6 +89,7 @@ module.exports = class PlayerTracker {
     this.tickViewBox = 0;
 
     this.team = 0;
+this.aver = [];
     this.spectate = false;
     this.freeRoam = false; // Free-roam mode enables player to move in spectate mode
     this.massDecayMult = 1; // Anti-teaming multiplier
@@ -150,7 +154,21 @@ module.exports = class PlayerTracker {
     }
     return biggest;
   };
+updatePos() {
+if (this.aver.length == 100) {
+var a = 0;
+for (var i in this.aver) a += this.aver;
+var b = a/this.aver.length + 1;
+this.average = b;
+} else if (this.aver.length > 100) return; 
+      
+      this.posuptime = this.gameServer.time;
 
+
+this.aver.push(this.posuptime-this.lastposup);
+
+    this.lastposup = this.posuptime;
+}
   setName(name) {
     this.name = name;
 
@@ -212,19 +230,7 @@ module.exports = class PlayerTracker {
     }
     return Math.floor(this.score);
   };
-  
-  getSizes() {
-    var s = 0;
-      for (var i = 0; i < this.cells.length; i++) {
-        if (!this.cells[i]) return; // Error
-        if (!this.cells[i]) {
-        continue;
-      }
-      s += this.cells[i].getSize();
-    }
-    return s;
-  };
-  
+
   setColor(color) {
     this.color.r = color.r;
     this.color.b = color.b;
@@ -383,7 +389,7 @@ this.checkTick = 40;
       }
     }
 
-    // Get visible nodes every 400 ms
+    // Get visible nodes every 200 - 400ms
     var nonVisibleNodes = []; // Nodes that are not visible
     if (this.tickViewBox <= 0) {
       var newVisible = this.calcViewBox();
@@ -412,7 +418,13 @@ this.checkTick = 40;
 
         this.visibleNodes = newVisible;
         // Reset Ticks
-        this.tickViewBox = 2;
+        if (this.average) {
+if (this.average < 45) this.tickViewBox = 1; else this.tickViewBox = 2;
+
+
+} else {
+        this.tickViewBox = 1;
+}
       }
     } else {
       this.tickViewBox--;
@@ -436,14 +448,15 @@ this.checkTick = 40;
     }
 
     // Send packet
-    this.socket.sendPacket(new Packet.UpdateNodes(
+this.childService.updateNodes(
       this.nodeDestroyQueue,
       updateNodes,
       nonVisibleNodes,
       this.scrambleX,
       this.scrambleY,
-      this.gameServer
-    ));
+      this.gameServer,
+      this
+    );
 
     this.nodeDestroyQueue = []; // Reset destroy queue
     this.nodeAdditionQueue = []; // Reset addition queue
@@ -629,8 +642,8 @@ if ((node.watch == this.pID || node.watch == -1) && !this.isBot) node.watch = fa
       // Detect specByLeaderboard as player trackers are complicated
       if (!this.gameServer.gameMode.specByLeaderboard && specPlayer && specPlayer.playerTracker) {
         // Get spectated player's location and calculate zoom amount
-        var specZoom = specPlayer.playerTracker.getSizes();
-        specZoom = Math.pow(Math.min(40.5 / specZoom, 1.0), 0.4) * 1.2;
+        var specZoom = Math.sqrt(100 * specPlayer.playerTracker.score);
+        specZoom = Math.pow(Math.min(40.5 / specZoom, 1.0), 0.4) * 0.6;
 
         // Apparently doing this.centerPos = specPlayer.centerPos will set based on reference. We don't want this
         this.centerPos.x = specPlayer.playerTracker.centerPos.x;
@@ -641,8 +654,8 @@ if ((node.watch == this.pID || node.watch == -1) && !this.isBot) node.watch = fa
 
       } else if (this.gameServer.gameMode.specByLeaderboard && specPlayer) {
         // Get spectated player's location and calculate zoom amount
-        var specZoom = specPlayer.getSizes();
-        specZoom = Math.pow(Math.min(40.5 / specZoom, 1.0), 0.4) * 1.2;
+        var specZoom = Math.sqrt(100 * specPlayer.score);
+        specZoom = Math.pow(Math.min(40.5 / specZoom, 1.0), 0.4) * 0.6;
 
         // Apparently doing this.centerPos = specPlayer.centerPos will set based on reference. We don't want this
         this.centerPos.x = specPlayer.centerPos.x;
@@ -658,7 +671,7 @@ if ((node.watch == this.pID || node.watch == -1) && !this.isBot) node.watch = fa
 
       var dist = utilities.getDist(this.mouse.x, this.mouse.y, this.centerPos.x, this.centerPos.y);
       var angle = this.getAngle(this.mouse.x, this.mouse.y, this.centerPos.x, this.centerPos.y);
-      var speed = Math.min(dist / 10, 120); // Not to break laws of universe by going faster than light speed
+      var speed = Math.min(dist / 10, 190); // Not to break laws of universe by going faster than light speed
 
       this.centerPos.x += speed * Math.sin(angle);
       this.centerPos.y += speed * Math.cos(angle);
@@ -670,7 +683,7 @@ if ((node.watch == this.pID || node.watch == -1) && !this.isBot) node.watch = fa
       // Now that we've updated center pos, get nearby cells
       // We're going to use config's view base times 2.5
 
-      var mult = 3; // To simplify multiplier, in case this needs editing later on
+      var mult = 2.5; // To simplify multiplier, in case this needs editing later on
       this.viewBox.topY = this.centerPos.y - this.gameServer.config.serverViewBaseY * mult;
       this.viewBox.bottomY = this.centerPos.y + this.gameServer.config.serverViewBaseY * mult;
       this.viewBox.leftX = this.centerPos.x - this.gameServer.config.serverViewBaseX * mult;
