@@ -1,39 +1,40 @@
 ### Ogar Improvements
-[![Build Status](https://travis-ci.org/AJS-development/Ogar-unlimited.svg?branch=master)](https://travis-ci.org/AJS-development/Ogar-unlimited) [![Join the chat at https://gitter.im/AJS-development/Ogar-unlimited](https://badges.gitter.im/AJS-development/Ogar-unlimited.svg)](https://gitter.im/AJS-development/Ogar-unlimited?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  [![GitHub issues](https://img.shields.io/github/issues/AJS-development/Ogar-unlimited.svg)](https://github.com/AJS-development/Ogar-unlimited/issues)  [![GitHub forks](https://img.shields.io/github/forks/AJS-development/Ogar-unlimited.svg)](https://github.com/AJS-development/Ogar-unlimited/network)  [![GitHub stars](https://img.shields.io/github/stars/AJS-development/Ogar-unlimited.svg)](https://github.com/AJS-development/Ogar-unlimited/stargazers)  [![Plugin](https://img.shields.io/badge/Official%20Plugin%20Library-OgarUL--Plugin--Library-green.svg)](https://github.com/AJS-development/OgarUL-Plugin-Library)  [![MS](https://img.shields.io/badge/Client-AJS--dev-green.svg)](https://github.com/AJS-development/OgarUL-Client) [![Plugin](https://img.shields.io/badge/Forums-OgarUl-green.svg)](http://forum.ogarul.io) [![Plugin](https://img.shields.io/badge/Stats-OgarUl-green.svg)](http://stats.ogarul.tk)  [![MS](https://img.shields.io/badge/Client-AJS--dev-green.svg)](http://ogarul.io) 
-[![Demo] (https://img.shields.io/badge/Demo-Heroku-green.svg)] (https://github.com/AJS-development/Ogar-unlimited/wiki/Demos)
+[![Build Status](https://travis-ci.org/AJS-development/Ogar-unlimited.svg?branch=master)](https://travis-ci.org/AJS-development/Ogar-unlimited) [![Join the chat at https://gitter.im/AJS-development/Ogar-unlimited](https://badges.gitter.im/AJS-development/Ogar-unlimited.svg)](https://gitter.im/AJS-development/Ogar-unlimited?### Ogar Improvements
+[![Build Status](https://travis-ci.org/AJS-development/Ogar-unlimited.svg?branch=master)](https://travis-ci.org/AJS-development/Ogar-unlimited) [![Join the chat at https://gitter.im/AJS-development/Ogar-unlimited](https://badges.gitter.im/AJS-development/Ogar-unlimited.svg)](https://gitter.im/AJS-development/Ogar-unlimited?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  [![GitHub issues](https://img.shields.io/github/issues/AJS-development/Ogar-unlimited.svg)](https://github.com/EtherTyper/OgarImprovements/issues)  [![GitHub forks](https://img.shields.io/github/forks/AJS-development/Ogar-unlimited.svg)](https://github.com/EtherTyper/OgarImprovements/network)  [![GitHub stars](https://img.shields.io/github/stars/AJS-development/Ogar-unlimited.svg)](https://github.com/EtherTyper/OgarImprovements/stargazers)  [![Plugin](https://img.shields.io/badge/Official%20Plugin%20Library-OgarUL--Plugin--Library-green.svg)](https://github.com/AJS-development/OgarUL-Plugin-Library)  [![MS](https://img.shields.io/badge/Client-AJS--dev-green.svg)](https://github.com/AJS-development/OgarUL-Client) [![Plugin](https://img.shields.io/badge/Forums-OgarUl-green.svg)](http://forum.ogarul.io) [![Plugin](https://img.shields.io/badge/Stats-OgarUl-green.svg)](http://stats.ogarul.tk)  [![MS](https://img.shields.io/badge/Client-AJS--dev-green.svg)](http://ogarul.io) 
+[![Demo] (https://img.shields.io/badge/Demo-Heroku-green.svg)] (https://github.com/EtherTyper/OgarImprovements/wiki/Demos)
 
 A fully functional open source Agar.io server implementation, written in Node.js by Devin Ryan, the AJS development team, and now me. Ogar Unlimited *(or in short, OgarUL)* is designed to be used with the latest Agar.io client and also our own official client, [**ogarul.io**](http://ogarul.io/). It is basically what it says in the title, Ogar, except its functionality is unlimited!
 
 ##Table of Contents
-- [Installation Guide (short)](https://github.com/AJS-development/Ogar-unlimited#installation-guide-short)
-- [Troubleshooting, FAQ and Tutorial](https://github.com/AJS-development/Ogar-unlimited#troubleshooting-faq-and-tutorial)
-- [Highlight features](https://github.com/AJS-development/Ogar-unlimited#hightlight-features-in-ogar-unlimited)
-- [Note](https://github.com/AJS-development/Ogar-unlimited#note)
- - [DO NOT BUY OGAR UL!](https://github.com/AJS-development/Ogar-unlimited#do-not-buy-ogar-ul)
- - [Do not get from other sources](https://github.com/AJS-development/Ogar-unlimited#do-not-get-from-other-sources)
-- [Obtaining and Using](https://github.com/AJS-development/Ogar-unlimited#obtaining-and-using)
-- [Configuring Ogar UL](https://github.com/AJS-development/Ogar-unlimited#configuring-ogar-ul)
-- [Plugins](https://github.com/AJS-development/Ogar-unlimited#plugins)
- - [How can I get plugins? Is there any official library?](https://github.com/AJS-development/Ogar-unlimited#how-can-i-get-plugins-is-there-any-official-library)
- - [How do I use other plugins?](https://github.com/AJS-development/Ogar-unlimited#how-do-i-use-other-plugin)
- - [How do I create a plugin? Is there any documentation?](https://github.com/AJS-development/Ogar-unlimited#how-do-i-create-a-plugin-is-there-any-documentation)
-- [Multiverse](https://github.com/AJS-development/Ogar-unlimited#multiverse)
-- [Minions](https://github.com/AJS-development/Ogar-unlimited#minions)
-- [Skin list and custom skins](https://github.com/AJS-development/Ogar-unlimited#skin-list-and-custom-skins)
-- [OP features](https://github.com/AJS-development/Ogar-unlimited#op)
-- [Easy Verify (anti bot measure)](https://github.com/AJS-development/Ogar-unlimited#easy-verify-anti-bot-measure)
-- [Custom Game Modes](https://github.com/AJS-development/Ogar-unlimited#custom-game-modes)
+- [Installation Guide (short)](https://github.com/EtherTyper/OgarImprovements#installation-guide-short)
+- [Troubleshooting, FAQ and Tutorial](https://github.com/EtherTyper/OgarImprovements#troubleshooting-faq-and-tutorial)
+- [Highlight features](https://github.com/EtherTyper/OgarImprovements#hightlight-features-in-ogar-unlimited)
+- [Note](https://github.com/EtherTyper/OgarImprovements#note)
+ - [DO NOT BUY OGAR UL!](https://github.com/EtherTyper/OgarImprovements#do-not-buy-ogar-ul)
+ - [Do not get from other sources](https://github.com/EtherTyper/OgarImprovements#do-not-get-from-other-sources)
+- [Obtaining and Using](https://github.com/EtherTyper/OgarImprovements#obtaining-and-using)
+- [Configuring Ogar UL](https://github.com/EtherTyper/OgarImprovements#configuring-ogar-ul)
+- [Plugins](https://github.com/EtherTyper/OgarImprovements#plugins)
+ - [How can I get plugins? Is there any official library?](https://github.com/EtherTyper/OgarImprovements#how-can-i-get-plugins-is-there-any-official-library)
+ - [How do I use other plugins?](https://github.com/EtherTyper/OgarImprovements#how-do-i-use-other-plugin)
+ - [How do I create a plugin? Is there any documentation?](https://github.com/EtherTyper/OgarImprovements#how-do-i-create-a-plugin-is-there-any-documentation)
+- [Multiverse](https://github.com/EtherTyper/OgarImprovements#multiverse)
+- [Minions](https://github.com/EtherTyper/OgarImprovements#minions)
+- [Skin list and custom skins](https://github.com/EtherTyper/OgarImprovements#skin-list-and-custom-skins)
+- [OP features](https://github.com/EtherTyper/OgarImprovements#op)
+- [Easy Verify (anti bot measure)](https://github.com/EtherTyper/OgarImprovements#easy-verify-anti-bot-measure)
+- [Custom Game Modes](https://github.com/EtherTyper/OgarImprovements#custom-game-modes)
 - Commands
- - [Chat commands](https://github.com/AJS-development/Ogar-unlimited#chat-commands)
- - [Console commands](https://github.com/AJS-development/Ogar-unlimited#console-commands)
-- [Contributing](https://github.com/AJS-development/Ogar-unlimited#contributing)
-- [Things that I don't want you to copy](https://github.com/AJS-development/Ogar-unlimited#things-that-i-dont-want-you-to-copy-copying-it-to-your-own-file-or-fork)
+ - [Chat commands](https://github.com/EtherTyper/OgarImprovements#chat-commands)
+ - [Console commands](https://github.com/EtherTyper/OgarImprovements#console-commands)
+- [Contributing](https://github.com/EtherTyper/OgarImprovements#contributing)
+- [Things that I don't want you to copy](https://github.com/EtherTyper/OgarImprovements#things-that-i-dont-want-you-to-copy-copying-it-to-your-own-file-or-fork)
 
 ###### Installation Guide (short)
 1. Download and install Node
     * Required version [**v5.9.0**](https://nodejs.org/download/release/v5.9.0/)
 2. Download Ogar Unlimited (Zip or Git)
-    * [Download Latest Zip](https://github.com/AJS-development/Ogar-unlimited/archive/master.zip)
+    * [Download Latest Zip](https://github.com/EtherTyper/OgarImprovements/archive/master.zip)
     * ``` git clone git@github.com:AJS-development/Ogar-unlimited.git ```
 3. Once downloaded
     * Extract the zip folder into somewhere else. Then,
@@ -47,22 +48,22 @@ A fully functional open source Agar.io server implementation, written in Node.js
 6. You're all done. Now, you can play it by go to [**ogarul.io**](http://ogarul.io/). Continue reading for more info
 
 ###### Troubleshooting, FAQ and Tutorial
-- [Troubleshooting Guide](https://github.com/AJS-development/Ogar-unlimited/issues/1335)
+- [Troubleshooting Guide](https://github.com/EtherTyper/OgarImprovements/issues/1335)
 
-- [FAQ](https://github.com/AJS-development/Ogar-unlimited/issues/1336)
+- [FAQ](https://github.com/EtherTyper/OgarImprovements/issues/1336)
 
-- [How To Tutorial](https://github.com/AJS-development/Ogar-unlimited/issues/729)
+- [How To Tutorial](https://github.com/EtherTyper/OgarImprovements/issues/729)
 
 ### Highlight features in Ogar Unlimited
- 1. More useful commands! *(eg. `pmsg`, `merge`, `freeze`; see [here](https://github.com/AJS-development/Ogar-unlimited#console-commands) for more info)*
- 2. OP *(a.k.a OverPowered! Makes player OP, see [here](https://github.com/AJS-development/Ogar-unlimited#op) for more info)*
- 3. More game modes! *(see [here](https://github.com/AJS-development/Ogar-unlimited#custom-game-modes) for more info)*
+ 1. More useful commands! *(eg. `pmsg`, `merge`, `freeze`; see [here](https://github.com/EtherTyper/OgarImprovements#console-commands) for more info)*
+ 2. OP *(a.k.a OverPowered! Makes player OP, see [here](https://github.com/EtherTyper/OgarImprovements#op) for more info)*
+ 3. More game modes! *(see [here](https://github.com/EtherTyper/OgarImprovements#custom-game-modes) for more info)*
  4. Better physics *(ejected mass, split, autosplit, virus, etc; most of it are configurable, see "config.ini" or "advConfig.ini")* 
- 5. Skins! *(see [here](https://github.com/AJS-development/Ogar-unlimited#skin-list-and-custom-skins) for more info)*
- 6. Minions! *(see [here](https://github.com/AJS-development/Ogar-unlimited#minions) for more info)*
+ 5. Skins! *(see [here](https://github.com/EtherTyper/OgarImprovements#skin-list-and-custom-skins) for more info)*
+ 6. Minions! *(see [here](https://github.com/EtherTyper/OgarImprovements#minions) for more info)*
  7. Chat __*(play.ogarul.tk only)*__
- 8. Plugins *(add gamemodes and commands easily! see [here](https://github.com/AJS-development/Ogar-unlimited/wiki/Plugin-API-Tutorial) for how to make your own plugin!)*
- 9. Multi server support (see [multiverse](https://github.com/AJS-development/Ogar-unlimited#multiverse)) __*(play.ogarul.tk only)*__
+ 8. Plugins *(add gamemodes and commands easily! see [here](https://github.com/EtherTyper/OgarImprovements/wiki/Plugin-API-Tutorial) for how to make your own plugin!)*
+ 9. Multi server support (see [multiverse](https://github.com/EtherTyper/OgarImprovements#multiverse)) __*(play.ogarul.tk only)*__
  10. Teaming bots *(for testing purposes)*
  11. Chat commands __*(play.ogarul.tk only)*__
  12. "Opbyip" *(Makes player always OP using player's IP)*
@@ -86,10 +87,10 @@ Please note that this is updated very frequently and you should check for update
 If you've purchased a copy of Ogar UL, **you've just been scammed**! Ogar UL is an open source project, which means it is **FREE**. Yes, **FREE!** So if you paid any money for it, well, too bad.
 
 ### Do not get Ogar UL from other sources
-If you got OgarUL from anywhere besides github, **YOU SHOULD DELETE IT IMMEDIATLY!!!** Those might be bundled with **viruses and other things**. Remember, you are running this probably from `sudo`. **Get it from github only!**: https://github.com/AJS-development/Ogar-unlimited
+If you got OgarUL from anywhere besides github, **YOU SHOULD DELETE IT IMMEDIATLY!!!** Those might be bundled with **viruses and other things**. Remember, you are running this probably from `sudo`. **Get it from github only!**: https://github.com/EtherTyper/OgarImprovements
 
 ### Obtaining and Using
-As Ogar Unlimited is written in Node.js, you must have Node.js and its modules installed to use it. You can usually download Node using your distribution's package manager _(for *nix-like systems)_, or from the [**Node website**](http://nodejs.org) *(use version 5.9.0)*. To install the modules that is required, open up your system command line *(cmd for windows, terminal for mac)*, and simply type "**npm install**". If you are on windows, you could simply double click the `Install Dependencies (Windows).bat`. To see a detailed guide, go to the [Installation guide](https://github.com/AJS-development/Ogar-unlimited/wiki/Installation) in the wiki.
+As Ogar Unlimited is written in Node.js, you must have Node.js and its modules installed to use it. You can usually download Node using your distribution's package manager _(for *nix-like systems)_, or from the [**Node website**](http://nodejs.org) *(use version 5.9.0)*. To install the modules that is required, open up your system command line *(cmd for windows, terminal for mac)*, and simply type "**npm install**". If you are on windows, you could simply double click the `Install Dependencies (Windows).bat`. To see a detailed guide, go to the [Installation guide](https://github.com/EtherTyper/OgarImprovements/wiki/Installation) in the wiki.
 
 Currently, OgarUL listens on the following addresses and ports *(by default)*:
 * *:88 - for the stats server
@@ -98,7 +99,7 @@ Currently, OgarUL listens on the following addresses and ports *(by default)*:
 To start the game, simply double click the `Start.bat` or run "index.js" by typing `node index.js` in the console. Please note that on some systems, you may have to run the process as root or otherwise elevate your privileges to allow the process to listen on the needed ports.
 Once the game server is running, you can connect *(locally)* by typing `play.ogarul.tk/?ip=127.0.0.1:443` into your browser's address bar.
 
-If you want to use agar.io site as your client, use [OgarUL-NoClient](https://github.com/AJS-development/Ogar-unlimited-Noclient) instead. The instruction would be the same as above, except that you need to use `agar.io/?ip=127.0.0.1:443` to play *(locally)*.
+If you want to use agar.io site as your client, use [OgarUL-NoClient](https://github.com/EtherTyper/OgarImprovements-Noclient) instead. The instruction would be the same as above, except that you need to use `agar.io/?ip=127.0.0.1:443` to play *(locally)*.
 
  **If you are getting an _EADDRINUSE_ error, it means that the port required to run Ogar UL is being used. Usually, Skype is the culprit. To solve this, either close out skype, or change the serverPort value in settings/advconfig.ini to a different port. You will have to change your IP connection to "127.0.0.1:PORT"**
 
@@ -115,7 +116,7 @@ To install any plugins from the library, first do `plugin search [name_of_plugin
 To use a plugin, simply download the folder and drag it into the "**plugins**" folder under "**src**" folder or use the `plugin add` command. To use the plugin add command, the plugin must have a "**files.txt**" file. Then click on that file, click raw, and then copy the URL. Then do `plugin add [url] [pluginname]` and it will reload automatically for you. Thats it! Example, doing `plugin add https://raw.githubusercontent.com/AJS-development/OgarUL-Plugin-Library/master/devtools-plugin/files.txt devtools` will add a plugin called "devtools" to your plugins.
 
 #### How do I create a plugin? Is there any documentation?
-This is the fun part, creating your own plugins. There is an example plugin you should look at and there is a template plugin. You can look at [plugin API documentation](https://github.com/AJS-development/Ogar-unlimited/wiki/Plugin-API-Tutorial) for more detail.
+This is the fun part, creating your own plugins. There is an example plugin you should look at and there is a template plugin. You can look at [plugin API documentation](https://github.com/EtherTyper/OgarImprovements/wiki/Plugin-API-Tutorial) for more detail.
 
 ### Multiverse
 Multiverse is for having multiple servers in one console. The command for multiverse is `multiverse [command] [arg]`. Available commands are:
@@ -150,7 +151,7 @@ You can disable minions by typing `minion [id]` in console, or do `minion destro
 - To use agar.io skins, type `<skinname>` and then type your name. For example `<spy>lol` will give you "spy" skin with name of "lol". You can also use a custom skin from a website by typing `[website_url]name` *(without typing `http://` or `https://`, you need to use a url shortener though)*
 
 You can use custom skins by putting them in customskins.txt. The format should be `[skin_shorcut] :http//image_url` for using skin image from URL, or use `[skin_shortcut] :%skinname` for using agar.io skin instead. To use URL skin, use `:http//url_image`. **NOTE: Use only "http"(not "https"). Also, don't forget to put `:` before "http")**
-You can see more detailed guide on the [wiki](https://github.com/AJS-development/Ogar-unlimited/wiki/Skins-and-skin-shortcuts)
+You can see more detailed guide on the [wiki](https://github.com/EtherTyper/OgarImprovements/wiki/Skins-and-skin-shortcuts)
 
 ### OP
 OP is used for having fun in your server like trolling, increases your mass, shoots virus, etc. You can make yourself OP by typing `op [yourid]` in console. To toggle between modes, you need to press "Q" in order to use OP's features. Then, a "C" will appears next to your name. If you press "Q" again, it will add another "C" until you have 4 "C"'s. If you press Q once again, it will go back to normal state. What these does is:
@@ -242,7 +243,7 @@ mass [id] [mass]              | Sets the mass of all cells belonging to a specif
 merge [id]                    | Forces a player to merge
 minion [id] [amount] [name]   | Create minions. To turn off, do **minion [id]**. To destroy, do **minion destroy**.
 msg [message1] [message2] [etc...] | Changes the leaderboard to a message for a short time
-multiverse [command] [args]   | Manage multiple servers in 1 console. *(see [here](https://github.com/AJS-development/Ogar-unlimited#multiverse) for more info)*
+multiverse [command] [args]   | Manage multiple servers in 1 console. *(see [here](https://github.com/EtherTyper/OgarImprovements#multiverse) for more info)*
 name [id] [new name]          | Changes the name of the player with the specified id with **[new name]**. Skin name can be added aswell. _(Usage: **name 1 <kraken>Kraken**)_
 nojoin [id]                   | Makes a player unable to join
 op [id]                       | Makes a player OP
@@ -280,20 +281,5 @@ unwhitelist [ip]              | Remove an IP from whitelist
 
 ## Contributing
 Just make a pull request or make your own copy.
-
-### Things that I don't want you to copy *(copying it to your own file or fork)*
-1. No-Lag antibot measures
-2. OP
-3. Minions
-4. Smart bot/despawn
-5. Easy verify
-6. Periodic things *(pmsg, pcmd, etc..)*
-7. Mousefilter
-8. Plugins
-9. Advanced multiverse system
-10. Client config system
-11. Language support system
-12. Tutorial system
-13. Quadrants
 
 **Anything else, if you improved it, you don't have to give us credit. Or else, if you just copied, you must give us credit**
