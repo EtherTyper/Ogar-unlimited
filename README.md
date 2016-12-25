@@ -1,10 +1,8 @@
-
-![Ajs/Ogar-Unlimited - Graphics by LegitSoulja](http://root.ogarul.io/ajs.png)
-### - The Next Generation Ogar
+### Ogar Improvements
 [![Build Status](https://travis-ci.org/AJS-development/Ogar-unlimited.svg?branch=master)](https://travis-ci.org/AJS-development/Ogar-unlimited) [![Join the chat at https://gitter.im/AJS-development/Ogar-unlimited](https://badges.gitter.im/AJS-development/Ogar-unlimited.svg)](https://gitter.im/AJS-development/Ogar-unlimited?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  [![GitHub issues](https://img.shields.io/github/issues/AJS-development/Ogar-unlimited.svg)](https://github.com/AJS-development/Ogar-unlimited/issues)  [![GitHub forks](https://img.shields.io/github/forks/AJS-development/Ogar-unlimited.svg)](https://github.com/AJS-development/Ogar-unlimited/network)  [![GitHub stars](https://img.shields.io/github/stars/AJS-development/Ogar-unlimited.svg)](https://github.com/AJS-development/Ogar-unlimited/stargazers)  [![Plugin](https://img.shields.io/badge/Official%20Plugin%20Library-OgarUL--Plugin--Library-green.svg)](https://github.com/AJS-development/OgarUL-Plugin-Library)  [![MS](https://img.shields.io/badge/Client-AJS--dev-green.svg)](https://github.com/AJS-development/OgarUL-Client) [![Plugin](https://img.shields.io/badge/Forums-OgarUl-green.svg)](http://forum.ogarul.io) [![Plugin](https://img.shields.io/badge/Stats-OgarUl-green.svg)](http://stats.ogarul.tk)  [![MS](https://img.shields.io/badge/Client-AJS--dev-green.svg)](http://ogarul.io) 
 [![Demo] (https://img.shields.io/badge/Demo-Heroku-green.svg)] (https://github.com/AJS-development/Ogar-unlimited/wiki/Demos)
 
-A fully functional open source Agar.io server implementation, written in Node.js by AJS development team. Ogar Unlimited *(or in short, OgarUL)* is designed to be used with the latest Agar.io client and also our own official client, [**ogarul.io**](http://ogarul.io/). It is basically what it says in the title, Ogar, except its functionality is unlimited!
+A fully functional open source Agar.io server implementation, written in Node.js by Devin Ryan, the AJS development team, and now me. Ogar Unlimited *(or in short, OgarUL)* is designed to be used with the latest Agar.io client and also our own official client, [**ogarul.io**](http://ogarul.io/). It is basically what it says in the title, Ogar, except its functionality is unlimited!
 
 ##Table of Contents
 - [Installation Guide (short)](https://github.com/AJS-development/Ogar-unlimited#installation-guide-short)
