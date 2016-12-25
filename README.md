@@ -29,7 +29,6 @@ Note: We take the term _improvement_ lightly, here. Anything goes here, if it br
  - [Chat commands](https://github.com/EtherTyper/OgarImprovements#chat-commands)
  - [Console commands](https://github.com/EtherTyper/OgarImprovements#console-commands)
 - [Contributing](https://github.com/EtherTyper/OgarImprovements#contributing)
-- [Things that I don't want you to copy](https://github.com/EtherTyper/OgarImprovements#things-that-i-dont-want-you-to-copy-copying-it-to-your-own-file-or-fork)
 
 ###### Installation Guide (short)
 1. Download and install Node
