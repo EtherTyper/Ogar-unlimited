@@ -273,7 +273,7 @@ split [id] [count]            | Splits a player into **[count]** pieces.
 status                        | Shows the amount of players currently connected, time elapsed, memory usage *(memory used/memory allocated)*, and the current gamemode.
 team [id] [team (r,g,b)]      | Changes a players team. *(you might have to split to see the changes though)*
 tp [id] [x pos] [y pos]       | Teleports the specified player to the specified coordinates.
-troll [id]                    | You'll figure this one out. It's a suprise!
+troll [id]                    | You'll figure this one out. It's [a suprise](https://github.com/EtherTyper/OgarImprovements/blob/master/src/modules/commands/troll.js)!
 update  [all,botname,skin]    | Update to current/recent version & replace old with new.
 verify [command] [id]         | Verifies/Re-verifies a player. _(Usage: **verify reverify 1** force 1 to verify again)_
 virus [x pos] [y pos] [mass]  | Spawns a virus cell at those coordinates. If a mass value is not specified, then the server will default to "virusStartMass" in the config.
