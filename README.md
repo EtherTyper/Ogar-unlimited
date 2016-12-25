@@ -281,4 +281,4 @@ unwhitelist [ip]              | Remove an IP from whitelist
 ## Contributing
 Just make a pull request or make your own copy.
 
-**Anything else, if you improved it, you don't have to give us credit. Or else, if you just copied, you must give us credit**
+** Please give us credit and attribution as required by the Apache 2.0 license. **
