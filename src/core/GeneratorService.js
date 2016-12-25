@@ -43,9 +43,9 @@ module.exports = class GeneratorService {
     this.interval = setInterval(this.update.bind(this), 1);
   }
   startFood() {
- for (var i = 0; i < this.config.foodStartAmount; i++) {
-    this.spawnFood();
-  }
+    for (var i = 0; i < this.config.foodStartAmount; i++) {
+      this.spawnFood();
+    }
   }
   stop() {
     clearInterval(this.interval);
@@ -57,14 +57,12 @@ module.exports = class GeneratorService {
       if (this.gameServer.getWorld().getNodes('food').length < this.config.foodMinAmount) {
         let le = this.config.foodMinAmount - this.gameServer.getWorld().getNodes('food').length
         if (le && le > 5) {
-          for (var i = 0; i < le; i++)this.spawnFood();
-          
-          
+          for (var i = 0; i < le; i++) this.spawnFood();
+
         }
-        
+
       }
-      
-      
+
       let currentFoodSpawnRate = this.foodSpawned / (new Date() - this.startTime) * 1000;
       let toSpawn = this.foodSpawnRate - currentFoodSpawnRate;
       toSpawn = (toSpawn > this.foodSpawnRate) ? 0 : toSpawn;
@@ -78,11 +76,14 @@ module.exports = class GeneratorService {
   spawnFood() {
     this.foodSpawned++;
     let f = new Entity.Food(this.gameServer.getWorld().getNextNodeId(), null, utilities.getRandomPosition(this.config.borderRight, this.config.borderLeft, this.config.borderBottom, this.config.borderTop), this.config.foodMass, this.gameServer);
-    f.setColor(utilities.getRandomColor());
-
+    if (this.config.playerOldColors == 1) {
+      f.setColor(this.gameServer.getRandomColor());
+    } else {
+      f.setColor(utilities.getRandomColor());
+    }
     this.gameServer.addNode(f);
     this.gameServer.currentFood++;
-  };
+  }
 
   virusCheck() {
     // Checks if there are enough viruses on the map
@@ -94,7 +95,7 @@ module.exports = class GeneratorService {
         let virusSquareSize = (this.config.virusStartMass * 100) >> 0;
 
         // Check for players
-        let result = this.gameServer.getNodesPlayer().some((check)=> {
+        let result = this.gameServer.getNodesPlayer().some((check) => {
           if (check.mass < this.config.virusStartMass) return false;
 
           var squareR = check.getSquareSize(); // squared Radius of checking player cell
@@ -110,12 +111,10 @@ module.exports = class GeneratorService {
         // Spawn if no cells are colliding
         let v = new Entity.Virus(this.gameServer.getWorld().getNextNodeId(), null, pos, this.config.virusStartMass);
         if (this.gameServer.gameMode.ID == 2)
-         this.gameServer.addNode(v, "moving");
+          this.gameServer.addNode(v, "moving");
         else
           this.gameServer.addNode(v);
       }
     }
-  };
-
-
+  }
 };

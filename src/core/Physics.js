@@ -26,7 +26,7 @@ module.exports = class Physics {
   // todo need to figure out how to use world and not gameServer
   // todo this will take some work/thinking
   static ejectMass(player, world, gameServer) {
-    player.cells.forEach((cell)=> {
+    player.cells.forEach((cell) => {
       if (!cell) return;
       let angle = Physics.getAngleFromTo(player.mouse, cell.position);
 
@@ -53,11 +53,11 @@ module.exports = class Physics {
 
   // todo needs more work, should work on anything we might want to split, player/bots/anything
   static splitCells(player, world, gameServer) {
-    
+
     if (player.frozen || (!player.verify && gameServer.config.verify === 1)) return;
 
     let splitCells = 0; // How many cells have been split
-    player.cells.forEach((cell)=> {
+    player.cells.forEach((cell) => {
       if (!cell) return;
       // Player cell limit
       if (player.cells.length >= gameServer.config.playerMaxCells) return;
@@ -76,7 +76,7 @@ module.exports = class Physics {
       // Calculate mass and speed of splitting cell
       let newMass = cell.mass / 2;
       cell.mass = newMass;
-      
+
       if (angle == 0) angle = Math.PI / 2;
 
       // Create cell
@@ -84,23 +84,23 @@ module.exports = class Physics {
       split.setAngle(angle);
 
       if (gameServer.config.splitSpeedVersion == 1) {
-      var splitSpeed = gameServer.config.splitSpeed + (split.getSpeed() * 3 / 2) * Math.max(Math.log10(newMass) - 2.2, 1);
-       if (cell.mass <= 10) {
-         split.setMoveEngineData(132, 32, 0.85);
-      } else 
-       if (cell.mass <= 610) {
-           split.setMoveEngineData(122, 32, 0.85);
-      } else 
-       if (cell.mass <= 5000) {
-       split.setMoveEngineData(110, 32, 0.90);
-      } else 
-       if (cell.mass <= 10000) {
-         split.setMoveEngineData(105, 32, 0.91);
-      } else 
-       if (cell.mass <= 20000) {
-         split.setMoveEngineData(105, 32, 0.92);
-      } else 
-        split.setMoveEngineData(splitSpeed, 32, 0.85); //vanilla agar.io = 130, 32, 0.85
+        var splitSpeed = gameServer.config.splitSpeed + (split.getSpeed() * 3 / 2) * Math.max(Math.log10(newMass) - 2.2, 1);
+        if (cell.mass <= 10) {
+          split.setMoveEngineData(132, 32, 0.85);
+        } else
+        if (cell.mass <= 610) {
+          split.setMoveEngineData(122, 32, 0.85);
+        } else
+        if (cell.mass <= 5000) {
+          split.setMoveEngineData(110, 32, 0.90);
+        } else
+        if (cell.mass <= 10000) {
+          split.setMoveEngineData(105, 32, 0.91);
+        } else
+        if (cell.mass <= 20000) {
+          split.setMoveEngineData(105, 32, 0.92);
+        } else
+          split.setMoveEngineData(splitSpeed, 32, 0.85); //vanilla agar.io = 130, 32, 0.85
       } else {
         var splitSpeed = gameServer.config.splitSpeed + (split.getSpeed() * 3 / 2); //70 * Math.max(Math.log10(newMass) - 2.2, 1); //for smaller cells use splitspeed 150, for bigger cells add some speed //splitSpeed = 70 + (split.getSpeed() + 10);
         //split.setMoveEngineData(splitSpeed, 32, 0.85); //vanilla agar.io = 130, 32, 0.85

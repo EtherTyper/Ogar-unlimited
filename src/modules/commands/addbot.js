@@ -7,7 +7,7 @@ module.exports = function (gameServer, args) {
   gameServer.livestage = 2;
   gameServer.liveticks = 0;
   for (let i = 0; i < add; i++) {
-    gameServer.bots.addBot();
+    setTimeout(gameServer.bots.addBot.bind(gameServer.bots), i);
     // todo encapsulation
     gameServer.sbo++;
   }

@@ -1,4 +1,4 @@
-module.exports = function (gameServer, split) {
+module.exports = function(gameServer, split) {
   var id = parseInt(split[1]);
   if (isNaN(id)) {
     console.log("[Console] Please specify a valid player ID!");
@@ -15,8 +15,13 @@ module.exports = function (gameServer, split) {
         count++;
       }
 
-      console.log("[Console] Killed player " + client.name + " and removed " + count + " cells");
-      break;
+      if (client.name.length == 0) {
+        console.log("[Console] Killed An unnamed cell and removed " + count + " cells");
+        break;
+      } else {
+        console.log("[Console] Killed " + client.name + " and removed " + count + " cells");
+        break;
+      }
     }
   }
 };

@@ -14,7 +14,7 @@ unlimitffa.prototype = new FFA();
 
 // Gamemode Specific Functions
 unlimitffa.prototype.onServerInit = function (gameServer) {
-    gameServer.config.playerMaxCells = 50;
+    gameServer.config.playerMaxCells = 64;
     gameServer.config.playerRecombineTime = 0;
     gameServer.config.playerFastDecay = 0;
     gameServer.config.fastdecayrequire = 9000;
@@ -22,6 +22,6 @@ unlimitffa.prototype.onServerInit = function (gameServer) {
     gameServer.config.playerSpeed = 40;
     gameServer.config.splitSpeed = 82;
     gameServer.config.playerMinMassSplit = 10;
-  gameServer.lleaderboard = true;
+    gameServer.lleaderboard = true;
 };
 

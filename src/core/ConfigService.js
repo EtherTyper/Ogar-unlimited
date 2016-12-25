@@ -23,41 +23,40 @@ const path = require("path");
 module.exports = class ConfigService {
   constructor(ismaster) {
     this.config = { // Border - Right: X increases, Down: Y increases (as of 2015-05-20)
-        clientSMacro: 0,
-        clientWMacro: 0,
-        clientQMacro: 0,
-        clientEMacro: 0,
-        clientRMacro: 0,
-        clientDarkBG: 1,
-        clientChat: 2,
-        clientSkins: 2,
-        clientGrid: 2,
-        clientAcid: 1,
-        clientColors: 2,
-        clientNames: 2,
-        clientShowMass: 1,
-        clientSmooth: 1,
-        clientMaxName: 15,
-        
-    // Future features
-       //minionCount: 0,
+      clientSMacro: 0,
+      clientWMacro: 0,
+      clientQMacro: 0,
+      clientEMacro: 0,
+      clientRMacro: 0,
+      clientDarkBG: 1,
+      clientChat: 2,
+      clientSkins: 2,
+      clientGrid: 2,
+      clientAcid: 1,
+      clientColors: 2,
+      clientNames: 2,
+      clientShowMass: 1,
+      clientSmooth: 1,
+      clientMaxName: 15,
+
+      // Future features
+      //minionCount: 0,
       //  minimap: 0,
-        
-    
-        adminConfig: 0, // Turn on or off the use of admin configurations. (1 is on - 0 is off)
-        adminNames: "", // The name a user would have to use to register as an admin.
-        adminNewNames: "", // The name you will be changed to when using adminNames.
-        adminStartMass: 500, // Amount of mass the admins start with.
-        adminBlockNames: 1, // Block users using admin names.
-        serverAdminPass: "",
-        rainbowMode: 0,
-        specChatAllowed: 1,
-        chatMaxMessageLength: 70, // Length of messages in chat
-        chatIntervalTime: 2500, // ms between each message.
-        chatBlockedWords: "fuck;bitch", // Words to filter from chat
-        allowChat: 1,
-        chatBlockedWordsTo: "****", // Word to change filtered words to.
-        allowonly: "",
+
+      adminConfig: 0, // Turn on or off the use of admin configurations. (1 is on - 0 is off)
+      adminNames: "", // The name a user would have to use to register as an admin.
+      adminNewNames: "", // The name you will be changed to when using adminNames.
+      adminStartMass: 500, // Amount of mass the admins start with.
+      adminBlockNames: 1, // Block users using admin names.
+      serverAdminPass: "",
+      rainbowMode: 0,
+      specChatAllowed: 1,
+      chatMaxMessageLength: 70, // Length of messages in chat
+      chatIntervalTime: 2500, // ms between each message.
+      chatBlockedWords: "fuck;bitch", // Words to filter from chat
+      allowChat: 1,
+      chatBlockedWordsTo: "****", // Word to change filtered words to.
+      allowonly: "",
       consoleUpdateTime: 100,
       autoban: 0, // Auto bans a player if they are cheating
       randomEjectMassColor: 0, // 0 = off 1 = on
@@ -102,7 +101,7 @@ module.exports = class ConfigService {
       showbmessage: 0, // Notifys you if a banned player tried to join (0 = off [default]) 1 = on
       splitMult: 0.5, // What defines pushback, cell squishing, strength of small cells, snappiness, etc. NOTE: only works with splitversion set to 0
       splitSpeed: 70, // Splitting speed
-      splitSpeedVersion: 0, 
+      splitSpeedVersion: 0,
       splitDistance: 0.87, // How far your cell travels after splitting
       wDistance: 0.88, // How far your w's travel after shooting them
       autoSplitSpeed: 350, // The speed of autosplits when playerMaxMass is reached
@@ -201,6 +200,7 @@ module.exports = class ConfigService {
       tourneyAutoFill: 0, // If set to a value higher than 0, the tournament match will automatically fill up with bots after this amount of seconds
       tourneyAutoFillPlayers: 1, // The timer for filling the server with bots will not count down unless there is this amount of real players
       playerBotGrowEnabled: 1, // If 0, eating a cell with less than 17 mass while cell has over 625 wont gain any mass
+      playerOldColors: 0, // If 1, cells use the original ogar colors
     }; // end of this.config
     this.banned = [];
     this.opByIp = [];
@@ -229,9 +229,9 @@ module.exports = class ConfigService {
     return this.skinNames
 
   }
-getUniBan() {
-  return this.uniban
-}
+  getUniBan() {
+    return this.uniban
+  }
   getConfig() {
     return this.config;
   }
@@ -240,9 +240,9 @@ getUniBan() {
     return this.banned;
   }
 
-getUnique() {
-  return this.uniqueid;
-}
+  getUnique() {
+    return this.uniqueid;
+  }
   getOpByIp() {
     return this.opByIp;
   }
@@ -263,56 +263,55 @@ getUnique() {
     return this.skins;
   }
   loadUniBan() {
-  
-   request('https://raw.githubusercontent.com/AJS-development/Ogar-unlimited/master/src/uniban.txt', function (error, response, body) {
-          var data = '';
-          if (!error && response.statusCode == 200) {
-            fs.writeFileSync(__dirname + '/../uniban.txt', body);
-            this.log("[\x1b[32mOK\x1b[0m] Uniban updated");
-            var data = body
-          } else {
-           var data = fs.readFileSync(__dirname + '/../uniban.txt', body);
-           this.log("[\x1b[34mINFO\x1b[0m] Couldnt connect to server, uniban is loaded from local files.")
-          }
-          try {
-            this.uniban = data.split(/[\r\n]+/).filter(function (x) {
-        return x != ''; // filter empty names
-      });
-            
-          } catch (e) {
-            
-          }
-          
-   }.bind(this));
-}
-loadid() {
-  try {
-    this.uniqueid = fs.readFileSync(__dirname + '/../../../ouid.txt', "utf8");
-    
-  } catch (e) {
-    var random  = function(howMany, chars) {
-    chars = chars 
-        || "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
-    var rnd = crypto.randomBytes(howMany)
-        , value = new Array(howMany)
-        , len = chars.length;
 
-    for (var i = 0; i < howMany; i++) {
-        value[i] = chars[rnd[i] % len]
-    };
+    request('https://raw.githubusercontent.com/AJS-development/Ogar-unlimited/master/src/uniban.txt', function(error, response, body) {
+      var data = '';
+      if (!error && response.statusCode == 200) {
+        fs.writeFileSync(__dirname + '/../uniban.txt', body);
+        this.log("[\x1b[32mOK\x1b[0m] Uniban updated");
+        var data = body
+      } else {
+        var data = fs.readFileSync(__dirname + '/../uniban.txt', body);
+        this.log("[\x1b[34mINFO\x1b[0m] Couldnt connect to server, uniban is loaded from local files.")
+      }
+      try {
+        this.uniban = data.split(/[\r\n]+/).filter(function(x) {
+          return x != ''; // filter empty names
+        });
 
-    return value.join('');
-}
-this.uniqueid = random(10)
-    fs.writeFileSync(__dirname + '/../../../ouid.txt', this.uniqueid);
-    
+      } catch (e) {
+
+      }
+
+    }.bind(this));
   }
-  
-  this.log("[\x1b[34mINFO\x1b[0m] Your unique id is: " + this.uniqueid)
-}
+  loadid() {
+    try {
+      this.uniqueid = fs.readFileSync(__dirname + '/../../../ouid.txt', "utf8");
+
+    } catch (e) {
+      var random = function(howMany, chars) {
+        chars = chars ||
+          "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+        var rnd = crypto.randomBytes(howMany),
+          value = new Array(howMany),
+          len = chars.length;
+
+        for (var i = 0; i < howMany; i++) {
+          value[i] = chars[rnd[i] % len]
+        };
+
+        return value.join('');
+      }
+      this.uniqueid = random(10)
+      fs.writeFileSync(__dirname + '/../../../ouid.txt', this.uniqueid);
+
+    }
+
+    this.log("[\x1b[34mINFO\x1b[0m] Your unique id is: " + this.uniqueid)
+  }
 
   loadConfig() {
-
 
     try {
       var test = fs.readFileSync(__dirname + '/../files.json', 'utf-8');
@@ -331,7 +330,7 @@ this.uniqueid = random(10)
       fs.writeFileSync(__dirname + '/../settings/config.ini', ini.stringify(this.config));
     }
 
-    configFiles.forEach((file)=> {
+    configFiles.forEach((file) => {
       try {
         this.log('[\x1b[34mINFO\x1b[0m] Loading ' + file);
         // Load the contents of the config file
@@ -359,19 +358,19 @@ this.uniqueid = random(10)
 
   loadBanned() {
     try {
-      this.banned = fs.readFileSync(__dirname + "/../banned.txt", "utf8").split(/[\r\n]+/).filter(function (x) {
+      this.banned = fs.readFileSync(__dirname + "/../banned.txt", "utf8").split(/[\r\n]+/).filter(function(x) {
         return x != ''; // filter empty names
       });
 
     } catch (err) {
       this.log("[\x1b[34mINFO\x1b[0m] Banned.txt not found... Generating new banned.txt");
-      fs.writeFileSync(__dirname +'/../banned.txt', '');
+      fs.writeFileSync(__dirname + '/../banned.txt', '');
     }
   }
 
   loadOpByIp() {
     try {
-      this.opByIp = fs.readFileSync(__dirname + "/../opbyip.txt", "utf8").split(/[\r\n]+/).filter(function (x) {
+      this.opByIp = fs.readFileSync(__dirname + "/../opbyip.txt", "utf8").split(/[\r\n]+/).filter(function(x) {
         return x != ''; // filter empty names
       });
     } catch (err) {
@@ -394,34 +393,33 @@ this.uniqueid = random(10)
   loadBotNames() {
     try {
       // Read and parse the names - filter out whitespace-only names
-      this.botNames = fs.readFileSync(path.join(__dirname, '..', 'botnames.txt'), "utf8").split(/[\r\n]+/).filter(function (x) {
-      return x != ''; // filter empty names
-    });
+      this.botNames = fs.readFileSync(path.join(__dirname, '..', 'botnames.txt'), "utf8").split(/[\r\n]+/).filter(function(x) {
+        return x != ''; // filter empty names
+      });
     } catch (e) {
       // Nothing, use the default names
       fs.writeFileSync(__dirname + '/../botnames.txt', '');
     }
   }
-loadRandomSkin() {
+  loadRandomSkin() {
 
-   try {
+    try {
       // Read and parse the names - filter out whitespace-only names
-      this.skinNames = fs.readFileSync(path.join(__dirname, '/../', 'randomSkins.txt'), "utf8").split(/[\r\n]+/).filter(function (x) {
-      return x != ''; // filter empty names
-    });
+      this.skinNames = fs.readFileSync(path.join(__dirname, '/../', 'randomSkins.txt'), "utf8").split(/[\r\n]+/).filter(function(x) {
+        return x != ''; // filter empty names
+      });
     } catch (e) {
       // Nothing, use the default names
       fs.writeFileSync(__dirname + '/../randomSkins.txt', '');
     }
   }
 
-
   // todo this needs maintenance
   loadCustomSkin() {
     try {
       if (!fs.existsSync(__dirname + '/../customskins.txt')) {
         this.log("[\x1b[34mINFO\x1b[0m] Generating customskin.txt...");
-        request('https://raw.githubusercontent.com/AJS-development/Ogar-unlimited/master/src/customskins.txt', function (error, response, body) {
+        request('https://raw.githubusercontent.com/AJS-development/Ogar-unlimited/master/src/customskins.txt', function(error, response, body) {
           if (!error && response.statusCode == 200) {
 
             fs.writeFileSync(__dirname + '/../customskins.txt', body);
@@ -431,9 +429,8 @@ loadRandomSkin() {
             fs.writeFileSync(__dirname + '/../customskins.txt', "");
           }
         });
-
       }
-      var loadskins = fs.readFileSync(__dirname + "/../customskins.txt", "utf8").split(/[\r\n]+/).filter(function (x) {
+      var loadskins = fs.readFileSync(__dirname + "/../customskins.txt", "utf8").split(/[\r\n]+/).filter(function(x) {
         return x != ''; // filter empty names
       });
       if (this.config.customskins == 1) {
@@ -446,10 +443,8 @@ loadRandomSkin() {
     } catch (e) {
       console.warn("[\x1b[31mFAIL\x1b[0m] Failed to load/download customskins.txt")
     }
-
   }
   log(a) {
     if (this.isMaster) console.log(a)
-    
   }
 };

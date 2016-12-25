@@ -5,7 +5,7 @@ function SFFA() {
   Mode.apply(this, Array.prototype.slice.call(arguments));
 
   this.ID = 7;
-  this.name = "SFFA";
+  this.name = "ShrinkingFFA";
   this.packetLB = 48;
 
   // Config (1 tick = 1000 ms)

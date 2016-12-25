@@ -14,7 +14,6 @@ The AJS Dev Team.
 
 */
 
-
 const ControlServer = require('./ControlServer.js')
 const Commands = require('../modules/CommandList');
 const fs = require('fs');
@@ -27,8 +26,8 @@ module.exports = class Multiverse {
     this.info = [];
     this.olddata = [];
     this.data = {
-language: "",
-};
+      language: "",
+    };
     this.newStage = 0;
     this.language = false;
     this.gLanguage = false;
@@ -41,136 +40,123 @@ language: "",
     return this.info;
   }
   getNextId() {
-    this.index ++;
+    this.index++;
     return this.index;
   }
   restart() {
     try {
-    var serv = [];
-    for (var i in this.servers) {
-      var server = this.servers[i];
-       if (!server) continue;
-      if (server.name == this.selected.name) var s = true;
-      else var s = false;
-      var p = {
-        name: server.name,
-        port: server.port,
-        gamemode: server.gamemode,
-        isMaster: server.isMaster,
-        selected: s,
-        title: server.title
-      };
-      serv.push(p);
-    }
-    this.stop();
-    if (global.gc) {
-      console.log("[Console] Running garbage collect to reduce memory");
-      global.gc();
-    }
-    
- 
-    for (var i in serv) {
-      var old = serv[i]
-      if (old.selected) {
-       var selected = this.create(old.name,old.isMaster,old.port,old.gamemode, old.title);
-        if (selected) {
-          
-          this.selected = selected;
-          console.log("[Console] Restarted and selected " + old.name);
-        } else {
-          console.log("[Console] Error in restarting server " + old.name);
-        }
-      } else {
-        if (this.create(old.name,old.isMaster,old.port,old.gamemode, old.title)) {
-        
-          console.log("[Console] Restarted " + old.name);
-        } else {
-          console.log("[Console] Error in restarting server " + old.name);
-        }
-        
+      var serv = [];
+      for (var i in this.servers) {
+        var server = this.servers[i];
+        if (!server) continue;
+        if (server.name == this.selected.name) var s = true;
+        else var s = false;
+        var p = {
+          name: server.name,
+          port: server.port,
+          gamemode: server.gamemode,
+          isMaster: server.isMaster,
+          selected: s,
+          title: server.title
+        };
+        serv.push(p);
       }
-    
-    }
-    
-    return true;
+      this.stop();
+      if (global.gc) {
+        console.log("[Console] Running garbage collect to reduce memory");
+        global.gc();
+      }
+
+      for (var i in serv) {
+        var old = serv[i]
+        if (old.selected) {
+          var selected = this.create(old.name, old.isMaster, old.port, old.gamemode, old.title);
+          if (selected) {
+            this.selected = selected;
+            console.log("[Console] Restarted and selected " + old.name);
+          } else {
+            console.log("[Console] Error in restarting server " + old.name);
+          }
+        } else {
+          if (this.create(old.name, old.isMaster, old.port, old.gamemode, old.title)) {
+
+            console.log("[Console] Restarted " + old.name);
+          } else {
+            console.log("[Console] Error in restarting server " + old.name);
+          }
+        }
+      }
+      return true;
     } catch (e) {
       console.log("[Console] Error in restarting:");
       console.log(e);
       return false;
-      
     }
   }
-  create(name,ismaster, port, gamemode, titlea) {
+  create(name, ismaster, port, gamemode, titlea) {
     if (!this.servers[name] && (-1 == this.ports.indexOf(port) || !port)) {
-    var title = (titlea) ? titlea : name
-    var l = new ControlServer(this.version,this.info, port,ismaster, name, this.language ,null, gamemode, title);
-    l.init();
-    l.start();
-     var id = this.getNextId();
-    
+      var title = (titlea) ? titlea : name
+      var l = new ControlServer(this.version, this.info, port, ismaster, name, this.language, null, gamemode, title);
+      l.init();
+      l.start();
+      var id = this.getNextId();
       var i = {
-      name: name,
-      port: port,
-      gamemode: gamemode,
-      title: title,
-      isMaster: ismaster,
-      id: id,
-    }
-    
-  if (port) this.ports.push(port);
-   
-    l.id = id;
-    this.info[id] = i;
-    this.servers[name] = l;
-    for (var i in this.servers) {
-var server = this.servers[i];  
-if (!server) continue;
-server.gameServer.reloadDataPacket();
-}
-    return l;
+        name: name,
+        port: port,
+        gamemode: gamemode,
+        title: title,
+        isMaster: ismaster,
+        id: id,
+      }
+      if (port) this.ports.push(port);
+      l.id = id;
+      this.info[id] = i;
+      this.servers[name] = l;
+      for (var i in this.servers) {
+        var server = this.servers[i];
+        if (!server) continue;
+        server.gameServer.reloadDataPacket();
+      }
+      return l;
     } else {
       return false;
     }
-  
-    
   }
   remove(name) {
-   if (!name) return false;
-     if (this.servers[name].name == name && !this.servers[name].isMaster && this.servers[name].name != this.selected.name) {
-var index = this.servers[name].id;
-if (index) {
-    this.info.splice(index, 1);
-}
-if (this.servers[name].port) {
-var index = this.ports.indexOf(this.servers[name].port)
-if (index != -1) {
-    this.ports.splice(index, 1);
-}
-}
-this.servers[name].stop();
-this.servers[name] = undefined;
-for (var i in this.servers) {
-var server = this.servers[i];
-  if (!server) continue;
-server.gameServer.reloadDataPacket();
-}
+    if (!name) return false;
+    if (this.servers[name].name == name && !this.servers[name].isMaster && this.servers[name].name != this.selected.name) {
+      var index = this.servers[name].id;
+      if (index) {
+        this.info.splice(index, 1);
+      }
+      if (this.servers[name].port) {
+        var index = this.ports.indexOf(this.servers[name].port)
+        if (index != -1) {
+          this.ports.splice(index, 1);
+        }
+      }
+      this.servers[name].stop();
+      this.servers[name] = undefined;
+      for (var i in this.servers) {
+        var server = this.servers[i];
+        if (!server) continue;
+        server.gameServer.reloadDataPacket();
+      }
       return true;
-     }
-   
-   return false;
+    }
+    return false;
   }
   init() {
     if (this.getLanguage()) this.selected = this.create("Main", true);
   }
   writeTitle() {
-      console.log("\u001B[33m                                        _ _       _              _ ");
+    console.log("\u001B[33m                                        _ _       _              _ ");
     console.log("                                       | (_)     (_)_           | |");
     console.log("  ___   ____  ____  ____    _   _ ____ | |_ ____  _| |_  ____ _ | |");
     console.log(" / _ \\ / _  |/ _  |/ ___)  | | | |  _ \\| | |    \\| |  _)/ _  ) || |");
     console.log("| |_| ( ( | ( ( | | |      | |_| | | | | | | | | | | |_( (/ ( (_| |");
     console.log(" \\___/ \\_|| |\\_||_|_|       \\____|_| |_|_|_|_|_|_|_|\\___)____)____|");
     console.log("      (_____|                                                      \u001B[0m");
-    
   }
   setlang(lang) {
     this.language = lang;
@@ -179,8 +165,7 @@ server.gameServer.reloadDataPacket();
     this.selected = this.create("Main", true);
     setTimeout(function() {
       this.newStage = 0;
-      
-    }.bind(this),3000);
+    }.bind(this), 3000);
   }
   pressed(str) {
     var stage = this.newStage
@@ -191,7 +176,8 @@ server.gameServer.reloadDataPacket();
         return;
       }
       var count = 0;
-      console.log("[Tutorial] Hello, today I will be teaching you how to use Ogar Unlimited.");this.newStage = 1;
+      console.log("[Tutorial] Hello, today I will be teaching you how to use Ogar Unlimited.");
+      this.newStage = 1;
       var s = function() {
         if (count == 0) {
           console.log("[Tutorial] Ogar Unlimited , when run, is playable using http://play.ogarul.tk")
@@ -210,7 +196,7 @@ server.gameServer.reloadDataPacket();
         } else
         if (count == 5) {
           console.log("[Tutorial] You can configure things such as gamemodes, chat, speed and other things");
-        } 
+        }
         if (count == 6) {
           console.log("[Tutorial] Feel lonely? you can add robots to the game by doing the addbot command.")
         } else
@@ -231,26 +217,22 @@ server.gameServer.reloadDataPacket();
         } else
         if (count == 12) {
           console.log("[Tutorial] There are too many features to describe, so explore! You will never be bored because of the many features it has, some even undocumented! (press enter)")
-        return true;
-          
-        } 
-        
-        count ++;
-    
+          return true;
+        }
+        count++;
       }
       this.newStage = 20
       this.interval = setInterval(function() {
         if (s()) {
-clearInterval(this.interval);
-this.newStage = 2;
-}
-        
+          clearInterval(this.interval);
+          this.newStage = 2;
+        }
       }.bind(this), 1500)
     } else if (stage == 20) {
-    console.log("[OgarUl] Skipped Tutorial (press enter)");  
-    this.newStage = 2;
-    clearInterval(this.interval);
-    return;
+      console.log("[OgarUl] Skipped Tutorial (press enter)");
+      this.newStage = 2;
+      clearInterval(this.interval);
+      return;
     } else if (stage == 2) {
       console.log("[OgarUl] We will need to have some info beforehand.. (press enter)");
       this.newStage = 3
@@ -266,18 +248,17 @@ this.newStage = 2;
           this.setlang(str);
           return;
         }
-     fs.readFileSync(__dirname + "/../locals/" + str + ".js");
-     console.log(str + " selected");
-          console.log("[Console] Starting server...");
-          this.newStage = 5;
-          this.setlang(str)
-          return;
+        fs.readFileSync(__dirname + "/../locals/" + str + ".js");
+        console.log(str + " selected");
+        console.log("[Console] Starting server...");
+        this.newStage = 5;
+        this.setlang(str)
+        return;
       } catch (e) {
         console.log("[OgarUl] That language does not exist! (src/locals/" + str + ".js does not exsist)");
         return;
       }
     }
-    
   }
   getLanguage() {
     var create = function() {
@@ -289,24 +270,22 @@ this.newStage = 2;
       console.log("[OgarUl] Press the ENTER key (or type N and press enter to skip tutorial)");
     }.bind(this);
     try {
-  var data = fs.readFileSync(__dirname + '/../info.json', "utf8");
-    data = JSON.parse(data);
-this.data = data;
-    this.language = data.language;
-    if (!this.language) {
-create();
-return false;
-}
-    console.log("[Console] Language " + this.language + " Selected");
-    return true;
+      var data = fs.readFileSync(__dirname + '/../info.json', "utf8");
+      data = JSON.parse(data);
+      this.data = data;
+      this.language = data.language;
+      if (!this.language) {
+        create();
+        return false;
+      }
+      console.log("[Console] Language " + this.language + " Selected");
+      return true;
     } catch (e) {
       create()
     }
-    
+
   }
-  start() {
-    
-  }
+  start() {}
   stop() {
     for (var i in this.servers) {
       if (!this.servers[i]) continue;
@@ -322,8 +301,8 @@ return false;
   }
   setSelected(a) {
     if (this.servers[a].name) {
-    this.selected = this.servers[a];
-    return true;
+      this.selected = this.servers[a];
+      return true;
     } else {
       return false;
     }
@@ -331,59 +310,59 @@ return false;
   getServers() {
     return this.servers;
   }
-   prompt(in_) {
+  prompt(in_) {
     let self = this;
-    return function () {
+    return function() {
       var col = '';
       try {
-      if (self.selected.gameServer.red) {
-      process.stdout.write("\x1b[31m\r");
-    }
-    if (self.selected.gameServer.green) {
-      process.stdout.write("\x1b[32m\r");
-    }
-    if (self.selected.gameServer.blue) {
-      process.stdout.write("\x1b[34m\r");
-    }
-    if (self.selected.gameServer.white) {
-      process.stdout.write("\x1b[37m\r");
-    }
-    if (self.selected.gameServer.yellow) {
-      process.stdout.write("\x1b[33m\r");
-    }
-    if (self.selected.gameServer.bold) {
-      process.stdout.write("\x1b[1m\r");
-    }
-    if (self.selected.gameServer.dim) {
-      process.stdout.write("\x1b[2m\r");
-    }
-      } catch (e) {
-        
-      }
-      
-      in_.question(">", function (str) {
-         if (self.newStage != 0) {
-      self.pressed(str);
-      
-    } else {
-        if (!self.selected) return;
-        if (self.selected.gameServer.config.dev != 1) {
-          try {
-            self.parseCommands(str);
-          } catch (err) {
-            console.log("[\x1b[31mERROR\x1b[0m] Oh my, there seems to be an error with the command " + str);
-            console.log("[\x1b[31mERROR\x1b[0m] Please alert AJS dev with this message:\n" + err);
-          }
-        } else {
-          self.parseCommands(str); // dev mode, throw full error
+        if (self.selected.gameServer.red) {
+          process.stdout.write("\x1b[31m\r");
         }
-}
+        if (self.selected.gameServer.green) {
+          process.stdout.write("\x1b[32m\r");
+        }
+        if (self.selected.gameServer.blue) {
+          process.stdout.write("\x1b[34m\r");
+        }
+        if (self.selected.gameServer.white) {
+          process.stdout.write("\x1b[37m\r");
+        }
+        if (self.selected.gameServer.yellow) {
+          process.stdout.write("\x1b[33m\r");
+        }
+        if (self.selected.gameServer.bold) {
+          process.stdout.write("\x1b[1m\r");
+        }
+        if (self.selected.gameServer.dim) {
+          process.stdout.write("\x1b[2m\r");
+        }
+      } catch (e) {
+
+      }
+
+      in_.question(">", function(str) {
+        if (self.newStage != 0) {
+          self.pressed(str);
+
+        } else {
+          if (!self.selected) return;
+          if (self.selected.gameServer.config.dev != 1) {
+            try {
+              self.parseCommands(str);
+            } catch (err) {
+              console.log("[\x1b[31mERROR\x1b[0m] Oh my, there seems to be an error with the command " + str);
+              console.log("[\x1b[31mERROR\x1b[0m] Please alert AJS dev with this message:\n" + err);
+            }
+          } else {
+            self.parseCommands(str); // dev mode, throw full error
+          }
+        }
         // todo fix this
         return self.prompt(in_)(); // Too lazy to learn async
       });
     };
   }
-   parseCommands(str) {
+  parseCommands(str) {
     // Log the string
     this.selected.gameServer.log.onCommand(str);
 
@@ -398,24 +377,23 @@ return false;
     var first = split[0].toLowerCase();
 
     // Get command function
-     var execute = this.commands[first];
+    var execute = this.commands[first];
     if (typeof execute !== 'undefined') {
       execute(this, split);
     } else {
-    var execute = this.selected.consoleService.commands[first];
-    if (typeof execute !== 'undefined') {
-      execute(this.selected.gameServer, split, true);
-    } else {
-      var execute = this.selected.gameServer.pluginCommands[first];
+      var execute = this.selected.consoleService.commands[first];
       if (typeof execute !== 'undefined') {
         execute(this.selected.gameServer, split, true);
-
       } else {
-         
-        console.log("[Console] Invalid Command, try \u001B[33mhelp\u001B[0m for a list of commands.");
+        var execute = this.selected.gameServer.pluginCommands[first];
+        if (typeof execute !== 'undefined') {
+          execute(this.selected.gameServer, split, true);
+
+        } else {
+
+          console.log("[Console] Invalid Command, try \u001B[33mhelp\u001B[0m for a list of commands.");
+        }
       }
     }
   }
-    
-};
-  }
+}

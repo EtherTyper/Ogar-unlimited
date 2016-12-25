@@ -34,7 +34,7 @@ module.exports = class BotPlayer extends PlayerTracker {
     this.foodImportant = []; // Not used - Bots will attempt to eat this regardless of nearby prey/predators
     this.virus = []; // List of viruses
     this.teamingwith = []; // player teamingwith
-    this.team = 0; // stage of teaming. 0 = off, 1 = init (shaking and giving mass), 2 = teamenabled, 3 = betrayal
+    this.teamStage = 0; // stage of teaming. 0 = off, 1 = init (shaking and giving mass), 2 = teamenabled, 3 = betrayal
 
     this.juke = true;
 
@@ -152,10 +152,10 @@ module.exports = class BotPlayer extends PlayerTracker {
             continue;
           }
           var random = Math.floor(Math.random()*500);
-          if (check.owner && random < 5 && Math.abs(check.owner.getScore() - this.getScore()) < 200 && this.team == 0) {
-            this.team = 1;
-          this.teamingwith = check.owner;
-          this.teameject = 0;
+          if (check.owner && random < 5 && Math.abs(check.owner.getScore() - this.getScore()) < 200 && this.teamStage == 0) {
+            this.teamStage = 1;
+            this.teamingwith = check.owner;
+            this.teameject = 0;
           }
 
           // Check for danger
@@ -233,7 +233,7 @@ module.exports = class BotPlayer extends PlayerTracker {
     if (this.gameState == 4) {
       return 4;
     }
-    if (this.team == 1) {
+    if (this.teamStage == 1) {
       return 6;
     }
 
@@ -450,7 +450,7 @@ module.exports = class BotPlayer extends PlayerTracker {
         case 6: // init team
         if (this.teamtimout < 1) {
              this.teamtimout = 30;
-             this.team = 0;
+             this.teamStage = 0;
              this.teameject = 0;
              // console.log("team timeout");
            } else {

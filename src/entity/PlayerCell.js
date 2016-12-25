@@ -1,4 +1,5 @@
 var Cell = require('./Cell');
+
 function PlayerCell() {
   Cell.apply(this, Array.prototype.slice.call(arguments));
   this.cellType = 0;
@@ -8,7 +9,9 @@ function PlayerCell() {
   this.ignoreCollision = false; // This is used by player cells so that they dont cause any problems when splitting
   this.restoreCollisionTicks = 0; // Ticks after which collision is restored on a moving cell
 }
+
 module.exports = PlayerCell;
+
 PlayerCell.prototype = new Cell();
 // Main Functions
 PlayerCell.prototype.onAutoMove = function(gameServer) {
@@ -20,6 +23,7 @@ PlayerCell.prototype.onAutoMove = function(gameServer) {
     }
   }
 };
+
 PlayerCell.prototype.visibleCheck = function(box, centerPos) {
   // Use old fashioned checking method if cell is small
   if (this.mass < 100) {
@@ -31,12 +35,14 @@ PlayerCell.prototype.visibleCheck = function(box, centerPos) {
   var lenY = cellSize + box.height >> 0; // Height of cell + height of the box (Int)
   return (this.abs(this.position.x - centerPos.x) < lenX) && (this.abs(this.position.y - centerPos.y) < lenY);
 };
+
 PlayerCell.prototype.simpleCollide = function(x1, y1, check, d) {
   // Simple collision check
   var len = d >> 0; // Width of cell + width of the box (Int)
   return (this.abs(x1 - check.position.x) < len) &&
 (this.abs(y1 - check.position.y) < len);
 };
+
 PlayerCell.prototype.calcMergeTime = function(base) {
   // The recombine mechanic has been completely revamped.
   // As time passes on, recombineTicks gets larger, instead of getting smaller.
@@ -51,6 +57,7 @@ PlayerCell.prototype.calcMergeTime = function(base) {
   }
   this.shouldRecombine = r;
 };
+
 PlayerCell.prototype.calcMergeTimeU = function(base) {
   // The recombine mechanic has been completely revamped.
   // As time passes on, recombineTicks gets larger, instead of getting smaller.
@@ -64,6 +71,7 @@ PlayerCell.prototype.calcMergeTimeU = function(base) {
   }
   this.shouldRecombine = r;
 };
+
 // Movement
 PlayerCell.prototype.calcMove = function(x2, y2, gameServer) {
   var config = gameServer.config;
@@ -109,7 +117,7 @@ PlayerCell.prototype.calcMove = function(x2, y2, gameServer) {
       if (config.splitversion == 1) {
         if (dist < collisionDist) { // Collided
           // The moving cell pushes out of the colliding cell
-          var mult = 0.8; // Limit from 0.5 to 2, not to have bugs
+          var mult = config.splitMult; // Limit from 0.5 to 2, not to have bugs
           var newDeltaY = y1 - cell.position.y;
           var newDeltaX = x1 - cell.position.x;
           var newAngle = Math.atan2(newDeltaX, newDeltaY);
@@ -173,10 +181,12 @@ PlayerCell.prototype.calcMove = function(x2, y2, gameServer) {
   this.position.y = y1 >> 0;
   if (this.gameServer) this.quadUpdate(this.gameServer);
 };
+
 // Override
 PlayerCell.prototype.getEatingRange = function() {
   return this.getSize() * .4;
 };
+
 PlayerCell.prototype.onConsume = function(consumer, gameServer) {
   if (!this.owner.verify && this.owner.gameServer.config.verify == 1) {} else {
     // Add an inefficiency for eating other players' cells
@@ -186,12 +196,14 @@ PlayerCell.prototype.onConsume = function(consumer, gameServer) {
     consumer.addMass(factor * this.mass);
   }
 };
+
 PlayerCell.prototype.onAdd = function(gameServer) {
   // Add to special player node list
   gameServer.addNodesPlayer(this);
   // Gamemode actions
   gameServer.gameMode.onCellAdd(this);
 };
+
 PlayerCell.prototype.onRemove = function(gameServer) {
   var index;
   // Remove from player cell list
@@ -204,13 +216,16 @@ PlayerCell.prototype.onRemove = function(gameServer) {
   // Gamemode actions
   gameServer.gameMode.onCellRemove(this);
 };
+
 PlayerCell.prototype.moveDone = function(gameServer) {
   this.ignoreCollision = false;
 };
+
 // Lib
 PlayerCell.prototype.abs = function(x) {
   return x < 0 ? -x : x;
 };
+
 PlayerCell.prototype.getDist = function(x1, y1, x2, y2) {
   var xs = x2 - x1;
   xs = xs * xs;

@@ -33,26 +33,25 @@ module.exports = class ControlServer {
     this.language = language;
     this.title = title;
     this.gamemode = gamemode;
-this.port = port;
-this.configService = new ConfigService(ismaster); // we need the config service first so we can setup other services / servers
-this.configService.load()
-this.isMaster = ismaster;
+    this.port = port;
+    this.configService = new ConfigService(ismaster); // we need the config service first so we can setup other services / servers
+    this.configService.load()
+    this.isMaster = ismaster;
     // share data
-this.config = this.configService.getConfig();
-this.world = new WorldModel(this.config.borderRight, this.config.borderLeft, this.config.borderBottom, this.config.borderTop);
+    this.config = this.configService.getConfig();
+    this.world = new WorldModel(this.config.borderRight, this.config.borderLeft, this.config.borderBottom, this.config.borderTop);
     // services
     this.consoleService = new ConsoleService(version, this.isMaster, name);
     this.updater = new Updater(this);
     this.multiverse = multiverse;
 
     // servers
-    this.gameServer = new GameServer(this.world, this.consoleService, this.configService , version, this.port, this.isMaster, this.name, banned, multiverse, gamemode, this.language);
+    this.gameServer = new GameServer(this.world, this.consoleService, this.configService, version, this.port, this.isMaster, this.name, banned, multiverse, gamemode, this.language);
 
     // configuration
     this.consoleService.setGameServer(this.gameServer);
 
   }
-
 
   /**
    * Inits the game server i.e. calls the updater and anything else that should run before we start the server.
@@ -78,22 +77,19 @@ this.world = new WorldModel(this.config.borderRight, this.config.borderLeft, thi
     this.gameServer.start();
   }
 
-
   /**
    * Shuts down the server. Depending on the reason it will restart if needed.
    * @param reason - restart, shutdown, update
    */
   stop(reason) {
     // todo ControlServer stop
-this.gameServer.stop();
+    this.gameServer.stop();
   }
 
   /**
    * Periodic control server task.
    */
-  update() {
-
-  }
+  update() {}
 
   getWorld() {
     return this.world;
@@ -102,8 +98,4 @@ this.gameServer.stop();
   getConsoleService() {
     return this.consoleService;
   }
-
-
-
 };
-

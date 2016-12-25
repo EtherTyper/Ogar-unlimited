@@ -1,4 +1,4 @@
-module.exports = function (gameServer, split) {
+module.exports = function(gameServer, split) {
   // Validation checks
   var id = parseInt(split[1]);
   if (isNaN(id)) {
@@ -44,11 +44,23 @@ module.exports = function (gameServer, split) {
   // Change name
   for (var i = 0; i < gameServer.clients.length; i++) {
     var client = gameServer.clients[i].playerTracker;
-
+    if (client.name.length == 0) {
+      if (client.pID == id) {
+        if (premium) {
+          client.premium = premium;
+          console.log("[Console] Changing An unnamed cell's skin to " + premium);
+        }
+        if (name.length > 0) {
+          console.log("[Console] Changing An unnamed cell to " + name);
+          client.name = name;
+        }
+        return;
+      }
+    }
     if (client.pID == id) {
       if (premium) {
         client.premium = premium;
-        console.log("[Console] Changing their skin to " + premium);
+        console.log("[Console] Changing " + client.name + "'s skin to " + premium);
       }
       if (name.length > 0) {
         console.log("[Console] Changing " + client.name + " to " + name);

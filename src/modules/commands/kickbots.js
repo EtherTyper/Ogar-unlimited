@@ -10,4 +10,5 @@ module.exports = function (gameServer, split) {
   }
 gameServer.sbo -= removed;
   console.log("[Console] Kicked " + toRemove + " bots");
+  return;
 };

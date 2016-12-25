@@ -17,7 +17,7 @@ const Commands = require('../modules/CommandList');
 const EOL = require('os').EOL;
 
 module.exports = class ConsoleService {
-  constructor(version, ismaster, name,multiverse) {
+  constructor(version, ismaster, name, multiverse) {
     this.gameServer = undefined;
     this.version = version;
     this.updateInterveral = 100;
@@ -26,19 +26,18 @@ module.exports = class ConsoleService {
     this.isLiveConsole = false;
     this.interveral = undefined;
     this.hasTitleBeenWriten = false;
-this.isMaster = ismaster;
+    this.isMaster = ismaster;
     // commands
     this.commands = Commands.list;
 
   }
-log(a) {
-  if (this.isMaster) console.log(a)
-  
-}
+  log(a) {
+    if (this.isMaster) console.log(a)
 
+  }
 
   start() {
-    
+
     this.log('[\x1b[34mINFO\x1b[0m] Starting ConsoleService');
     if (this.gameServer === undefined) {
       throw "[\x1b[31mFAIL\x1b[0m] GameSever has not been set, cannot start!"
@@ -72,7 +71,7 @@ log(a) {
         this.gameServer.liveticks = 0;
       }
       var players = 0;
-      this.gameServer.clients.forEach(function (client) {
+      this.gameServer.clients.forEach(function(client) {
         if (client.playerTracker && client.playerTracker.cells.length > 0)
           players++
       });
@@ -89,7 +88,7 @@ log(a) {
         this.gameServer.livestage = 2;
       }
       var players = 0;
-      this.gameServer.clients.forEach(function (client) {
+      this.gameServer.clients.forEach(function(client) {
         if (client.playerTracker && client.playerTracker.cells.length > 0)
           players++
       });
@@ -181,38 +180,36 @@ log(a) {
     process.stdout.write("   u n l i m i t e d    " + line6 + EOL);
     process.stdout.write("\x1b[0m\u001B[0m\u001B[u");
 
-   
     this.gameServer.liveticks++;
   }
   execCommand(command, split, sudo) {
     try {
       var execute = this.commands[command];
       if (typeof execute !== 'undefined') {
-      execute(this.gameServer, split, sudo);
-    } else {
-      var execute = this.gameServer.pluginCommands[command];
-      if (typeof execute !== 'undefined') {
         execute(this.gameServer, split, sudo);
-
       } else {
-        console.warn('[\x1b[31mFAIL\x1b[0m] Failed to run command: ' + command + " args: " + split);
+        var execute = this.gameServer.pluginCommands[command];
+        if (typeof execute !== 'undefined') {
+          execute(this.gameServer, split, sudo);
+
+        } else {
+          console.warn('[\x1b[31mFAIL\x1b[0m] Failed to run command: ' + command + " args: " + split);
+        }
       }
-    }
     } catch (e) {
       console.warn('[\x1b[31mFAIL\x1b[0m] Failed to run command: ' + command + " args: " + split);
     }
 
   };
-execcommand(command, args) {
- return this.execCommand(command, args); 
-}
-execommand(command, args) {
- return this.execCommand(command, args); 
-}
+  execcommand(command, args) {
+    return this.execCommand(command, args);
+  }
+  execommand(command, args) {
+    return this.execCommand(command, args);
+  }
   setGameServer(gameServer) {
     this.gameServer = gameServer;
   }
-
 
   writeTitle() {
     // Start msg
@@ -230,32 +227,31 @@ execommand(command, args) {
   }
   prompt(in_) {
     let self = this;
-    return function () {
+    return function() {
       var col = '';
       if (self.gameServer.red) {
-      process.stdout.write("\x1b[31m\r");
-    }
-    if (self.gameServer.green) {
-      process.stdout.write("\x1b[32m\r");
-    }
-    if (self.gameServer.blue) {
-      process.stdout.write("\x1b[34m\r");
-    }
-    if (self.gameServer.white) {
-      process.stdout.write("\x1b[37m\r");
-    }
-    if (self.gameServer.yellow) {
-      process.stdout.write("\x1b[33m\r");
-    }
-    if (self.gameServer.bold) {
-      process.stdout.write("\x1b[1m\r");
-    }
-    if (self.gameServer.dim) {
-      process.stdout.write("\x1b[2m\r");
-    }
-      
-      
-      in_.question(">", function (str) {
+        process.stdout.write("\x1b[31m\r");
+      }
+      if (self.gameServer.green) {
+        process.stdout.write("\x1b[32m\r");
+      }
+      if (self.gameServer.blue) {
+        process.stdout.write("\x1b[34m\r");
+      }
+      if (self.gameServer.white) {
+        process.stdout.write("\x1b[37m\r");
+      }
+      if (self.gameServer.yellow) {
+        process.stdout.write("\x1b[33m\r");
+      }
+      if (self.gameServer.bold) {
+        process.stdout.write("\x1b[1m\r");
+      }
+      if (self.gameServer.dim) {
+        process.stdout.write("\x1b[2m\r");
+      }
+
+      in_.question(">", function(str) {
         if (self.gameServer.config.dev != 1) {
           try {
             self.parseCommands(str);
@@ -296,11 +292,9 @@ execommand(command, args) {
         execute(this.gameServer, split);
 
       } else {
-         
+
         this.log("[Console] Invalid Command, try \u001B[33mhelp\u001B[0m for a list of commands.");
       }
     }
   }
-
 };
-

@@ -1,4 +1,4 @@
-module.exports = function (gameServer, split) {
+module.exports = function(gameServer, split) {
   // Validation checks
   var id = parseInt(split[1]);
   if (isNaN(id)) {
@@ -23,8 +23,13 @@ module.exports = function (gameServer, split) {
       for (var j in client.cells) {
         client.cells[j].setColor(color);
       }
-      console.log("Set the color of " + client.name + " to " + color.r + ", " + color.g + ", " + color.b + " ");
-      break;
+      if (client.name.length == 0) {
+        console.log("Set the color of An unnamed cell to " + color.r + ", " + color.g + ", " + color.b);
+        break;
+      } else {
+        console.log("Set the color of " + client.name + " to " + color.r + ", " + color.g + ", " + color.b);
+        break;
+      }
     }
   }
 };

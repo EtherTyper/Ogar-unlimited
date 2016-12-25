@@ -1,4 +1,4 @@
-module.exports = function (gameServer, split) {
+module.exports = function(gameServer, split) {
   // Validation checks
   var id = parseInt(split[1]);
   if (isNaN(id)) {
@@ -20,8 +20,13 @@ module.exports = function (gameServer, split) {
         client.cells[j].mass = amount;
       }
 
-      console.log("[Console] Set mass of " + client.name + " to " + amount);
-      break;
+      if (client.name.length == 0) {
+        console.log("[Console] Set mass of An unnamed cell to " + amount);
+        break;
+      } else {
+        console.log("[Console] Set mass of " + client.name + " to " + amount);
+        break;
+      }
     }
   }
 };

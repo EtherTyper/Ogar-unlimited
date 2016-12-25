@@ -5,7 +5,7 @@ function Unlimitpvp() {
   Mode.apply(this, Array.prototype.slice.call(arguments));
 
   this.ID = 5;
-  this.name = "Unlimitpvp";
+  this.name = "UnlimitPVP";
   this.packetLB = 48;
 
   // Config (1 tick = 1000 ms)
@@ -33,7 +33,7 @@ Unlimitpvp.prototype = new Mode();
 Unlimitpvp.prototype.startGamePrep = function (gameServer) {
   this.gamePhase = 1;
   this.timer = this.prepTime;
-  gameServer.config.playerMaxCells = 50;
+  gameServer.config.playerMaxCells = 64;
     gameServer.config.playerRecombineTime = 0;
     gameServer.config.playerFastDecay = 0;
     gameServer.config.fastdecayrequire = 9000;

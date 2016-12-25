@@ -208,22 +208,20 @@ Virus.prototype.onRemove = function (gameServer) {
 };
 Virus.prototype.onAutoMove = function (gameServer) {
   var r = 100; // Checking radius
-
-   let ejectedNodes = gameServer.getEjectedNodes();
-   var len = ejectedNodes.length;
-  for (var i = 0; i < len; i++) {
-   var check = ejectedNodes[i];
-if (check.quadrant != this.quadrant) continue;
-    var topY = check.position.y - r;
-    var bottomY = check.position.y + r;
-    var leftX = check.position.x - r;
-    var rightX = check.position.x + r;
+    let ejectedNodes = gameServer.getEjectedNodes();
+    for (var i = 0; i < ejectedNodes.length; i++) {
+    var check = ejectedNodes[i];
+    if (check.quadrant != this.quadrant) continue;
+      var topY = check.position.y - r;
+      var bottomY = check.position.y + r;
+      var leftX = check.position.x - r;
+      var rightX = check.position.x + r;
 
     if (this.collisionCheck(bottomY, topY, rightX, leftX)) {
-      check.angle = this.angle; //make sure new virus shoots in same direction as this virus
+      check.angle = 0; //vanilla default is right
       this.feed(check, gameServer);
-      i--;
-      len--;
+      this.mass = gameServer.config.virusStartMass;
+      ejectedNodes.length--;
     }
   }
 };
