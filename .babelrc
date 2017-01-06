@@ -1,7 +1,7 @@
 {
   "presets": [
+    "es3",
     "latest",
-    "react",
     "stage-0"
   ]
 }
