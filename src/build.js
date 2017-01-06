@@ -3,7 +3,7 @@ var Multiverse = require('./core/Multiverse');
 
 var Multiverse = new Multiverse('1.0.0');
 
-setTimeout(function () {
+setTimeout(() => {
   process.exit(0);
 }, 60000);
 

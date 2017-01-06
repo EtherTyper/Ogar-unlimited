@@ -6,8 +6,7 @@ var MovingVirus = require('../entity/MovingVirus');
 var StickyCell = require('../entity/StickyCell');
 var Beacon = require('../entity/Beacon');
 
-class Experimental2 {
-  constructor(){
+function Experimental2() {
   FFA.apply(this, Array.prototype.slice.call(arguments));
 
   this.ID = 8;
@@ -33,9 +32,17 @@ class Experimental2 {
   this.tickSticky = 0;
 
   this.beaconMass = 500;
-  }
-  
-  function spawnMotherCell(gameServer) {
+}
+
+module.exports = Experimental2;
+Experimental2.prototype = new FFA();
+
+// Gamemode Specific Functions
+
+
+
+
+Experimental2.prototype.spawnMotherCell = function (gameServer) {
   // Checks if there are enough mother cells on the map
   if (gameServer._nodesMother.length < this.motherMinAmount) {
     // Spawns a mother cell
@@ -79,13 +86,7 @@ class Experimental2 {
     var m = new MotherCell(gameServer.getWorld().getNextNodeId(), null, pos, this.motherCellMass);
     gameServer.addNode(m);
   }
-}
-}
-
-
-
-module.exports = exports;
-Experimental2.prototype = new FFA();
+};
 
 Experimental2.prototype.spawnMovingVirus = function (gameServer) {
   // Checks if there are enough moving viruses on the map

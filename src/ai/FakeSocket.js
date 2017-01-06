@@ -6,7 +6,7 @@ function FakeSocket(gameServer) {
 module.exports = FakeSocket;
 
 // Overrides
-FakeSocket.prototype.sendPacket = function (packet) {
+FakeSocket.prototype.sendPacket = packet => {
   // Fakes sending a packet
 };
 

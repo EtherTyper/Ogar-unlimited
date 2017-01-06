@@ -73,7 +73,7 @@ module.exports = class BotPlayer extends PlayerTracker {
   }
 
   update() { // Overrides the update function from player tracker
-  setTimeout(function() {
+  setTimeout(() => {
     // Remove nodes from visible nodes if possible
   
  for (var i = 0; i < this.nodeDestroyQueue.length; i++) {
@@ -211,7 +211,7 @@ module.exports = class BotPlayer extends PlayerTracker {
     this.decide(cell);
 
     this.nodeDestroyQueue = []; // Empty
-}.bind(this),0)
+},0)
   }
 
 // Custom

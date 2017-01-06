@@ -38,9 +38,8 @@ MinionLoader.prototype.loadNames = function () {
 
     // Read and parse the names - filter out whitespace-only names
     // fs.readFileSync is only used during server start
-    this.randomNames = fs.readFileSync("./botnames.txt", "utf8").split(/[\r\n]+/).filter(function (x) {
-      return x != ''; // filter empty names
-    });
+    this.randomNames = fs.readFileSync("./botnames.txt", "utf8").split(/[\r\n]+/).filter(x => // filter empty names
+    x != '');
   } catch (e) {
     // Nothing, use the default names
   }
