@@ -210,8 +210,8 @@ this.aver.push(this.posuptime-this.lastposup);
         var n = this.name.indexOf("]");
         if (n != -1) {
 
-          this.premium = ':http://' + this.name.substr(1, n - 1);
-          this.name = this.name.substr(n + 1);
+       
+          this.name = "Invalid Skin";
         }
       }
     }
